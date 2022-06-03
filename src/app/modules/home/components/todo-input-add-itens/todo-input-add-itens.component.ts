@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-todo-input-add-itens',
@@ -7,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TodoInputAddItensComponent implements OnInit {
 
+  @Output() public emitItemTAskList = new EventEmitter();
+
+  public addItemTaskList: string= "";
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  public submitItemTaskList(){
+    this.addItemTaskList = this.addItemTaskList.trim();
+    if(this.addItemTaskList){
+      this.emitItemTAskList.emit(this.addItemTaskList);
+    }
+    this.addItemTaskList = "";
+  }
 }
